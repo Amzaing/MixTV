@@ -1,8 +1,1 @@
-https://gh-proxy.org/https://raw.githubusercontent.com/Guovin/iptv-api/gd/output/result.m3u
-https://gh-proxy.org/https://raw.githubusercontent.com/cloudplains/jnsj/refs/heads/main/tv202303.m3u
-https://gh-proxy.org/https://raw.githubusercontent.com/kimwang1978/collect-txt/refs/heads/main/others_output.txt
-https://gh-proxy.org/https://raw.githubusercontent.com/kimwang1978/collect-txt/refs/heads/main/bbxx.txt
-https://gh-proxy.org/https://raw.githubusercontent.com/kimwang1978/collect-txt/refs/heads/main/bbxx_lite.m3u
-https://gh-proxy.com/https://raw.githubusercontent.com/vbskycn/iptv/refs/heads/master/tv/iptv4.txt
-https://gh-proxy.com/https://raw.githubusercontent.com/develop202/migu_video/refs/heads/main/interface.txt
 https://gh-proxy.com/https://raw.githubusercontent.com/YueChan/Live/refs/heads/main/IPTV.m3u
