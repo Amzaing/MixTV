@@ -1,0 +1,9 @@
+# 📻 台名
+name: FM,AM,哈哈,广播,电台,声音,公众号,中国之声,经济之声,音乐之声,文艺之声,经典调频
+
+# 🎬 后缀
+ext: .mp4, .flv, .mkv, .avi, .rmvb, .mov
+
+# 🌐 IP域名
+ip: aktv., test., freetv., catvod., txiptv., mytv666., bak.dou, kkk.jjjj,
+    live.xmcdn,live.ximalaya,38.75.136.137,61.221.215.25

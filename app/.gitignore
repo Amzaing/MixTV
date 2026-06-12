@@ -1,0 +1,18 @@
+.gradle/
+/build/
+/*/build/
+
+/.idea
+*.iml
+*.ipr
+*.iws
+.DS_Store
+
+
+# jar
+/gradle/wrapper/gradle-wrapper.jar
+
+#
+/src/main/assets/*.md
+local.properties
+signing/
