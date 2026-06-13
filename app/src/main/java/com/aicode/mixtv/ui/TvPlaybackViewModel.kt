@@ -19,6 +19,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.flow.first
+import java.util.concurrent.ConcurrentHashMap
 
 /**
  * 📺 完美的工业级纯净版 TvPlaybackViewModel（最终对齐定稿）
@@ -36,6 +37,9 @@ class TvPlaybackViewModel(private val repository: TvRepository) : ViewModel() {
 
     private var isSwitching = false
     private var cutSourceJob: kotlinx.coroutines.Job? = null
+
+    // 🎯 账本1：记录洗白后的直链 (原始URL -> 纯净直链)
+    private val washedUrlCache = ConcurrentHashMap<String, String>()
 
     init {
         // 💡 1. 开机冷启动：快照独立注入，防范持久层自动震荡
@@ -192,11 +196,21 @@ class TvPlaybackViewModel(private val repository: TvRepository) : ViewModel() {
     private suspend fun playMediaUrl(url: String) {
         if (url.isBlank()) return
         try {
-            Log.d("MixTV_Player", "🎬 探路兵出击，正在剥离重定向: $url")
+            var finalUrl = url
+            if(washedUrlCache.containsKey(url)){
+                finalUrl = washedUrlCache[url]?:url
+                Log.d("MixTV_Player", "🎬 使用缓存地址 $url")
+            }else{
+                Log.d("MixTV_Player", "🎬 探路兵出击，正在剥离重定向: $url")
+                val realWashedUrl = RedirectResolver.resolveRealUrl(url)
+                if (!realWashedUrl.isNullOrBlank()){
+                    finalUrl = realWashedUrl
+                    washedUrlCache[url] = realWashedUrl
+                    Log.i("MixTV_Player", "🟢 预检通关！最终投喂内核: $finalUrl")
+                }
+            }
             // 🎯【一石二鸟】：换台和切源，都会在这里顺道把 301/302 扒干净！
             // OkHttp HEAD 请求在后台跑，拿回真正能播的 200 OK 直播流
-            val finalUrl = RedirectResolver.resolveRealUrl(url)
-            Log.i("MixTV_Player", "🟢 预检通关！最终投喂内核: $finalUrl")
             player?.apply {
                 setMediaItem(MediaItem.fromUri(finalUrl))
                 prepare()

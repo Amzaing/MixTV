@@ -69,9 +69,9 @@ object M3uFilter {
                 }
             }
 
-            if (isBad) {
+/*            if (isBad) {
                 Log.e(TAG, "🛡️ [黑名单击杀] [${src.channelName}] -> ${src.url}")
-            }
+            }*/
             !isBad
         }
     }
